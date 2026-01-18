@@ -753,17 +753,59 @@ function stopBreathing() {
 async function generateImage() {
     const btn = document.getElementById('generate-btn');
     const imageContainer = document.getElementById('generated-image');
-    const prompt = `A beautiful, calming image of a ${currentWords[0]} ${currentWords[2]} with a ${currentWords[1]} atmosphere, digital art style, peaceful and serene`;
+    const prompt = `Create a beautiful, peaceful, calming landscape: ${currentWords[0]} ${currentWords[2]} with ${currentWords[1]} atmosphere. Serene, tranquil, digital art style.`;
+    
+    // 🔑 ADD YOUR API KEY HERE - Replace YOUR_GEMINI_API_KEY with your actual key
+    const API_KEY = 'AIzaSyAjbMDZGBMC3PU3bTSQ_HhqGttusNQLofw';
+    
+    // Check if API key is set
+    if (API_KEY === 'AIzaSyAjbMDZGBMC3PU3bTSQ_HhqGttusNQLofw') {
+        imageContainer.innerHTML = '<p class="generate-placeholder">⚠️ Please add your Gemini API key!<br><br>Get one free at:<br><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent-warm);">aistudio.google.com/app/apikey</a><br><br>Then edit index.html and replace YOUR_GEMINI_API_KEY</p>';
+        return;
+    }
     
     btn.disabled = true;
     btn.textContent = 'Generating...';
-    imageContainer.innerHTML = '<p class="generate-placeholder">Creating your image...</p>';
+    imageContainer.innerHTML = '<p class="generate-placeholder">Creating your AI image...<br><br>This takes 15-30 seconds...</p>';
     
-    setTimeout(() => {
-        imageContainer.innerHTML = `<p class="generate-placeholder">Image prompt ready:<br><br><em>"${prompt}"</em><br><br>Connect an AI image API (like DALL-E, Stable Diffusion, or Gemini) to generate real images.</p>`;
-        btn.disabled = false;
-        btn.textContent = 'Generate Image';
-    }, 1500);
+    try {
+        // Use Imagen 3 via Gemini API
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                instances: [{
+                    prompt: prompt
+                }],
+                parameters: {
+                    sampleCount: 1,
+                    aspectRatio: "1:1",
+                    safetySetting: "block_some",
+                    personGeneration: "dont_allow"
+                }
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.predictions && data.predictions[0] && data.predictions[0].bytesBase64Encoded) {
+            const base64Image = data.predictions[0].bytesBase64Encoded;
+            imageContainer.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="width:100%;height:100%;object-fit:cover;border-radius:16px;" alt="AI Generated: ${prompt}">`;
+        } else {
+            throw new Error('No image in response');
+        }
+        
+    } catch (error) {
+        console.error('Image generation error:', error);
+        imageContainer.innerHTML = `<p class="generate-placeholder">❌ Couldn't generate image<br><br>Error: ${error.message}<br><br>Your prompt:<br><em>"${prompt}"</em><br><br>Try using it in:<br>• Bing Image Creator (free!)<br>• DALL-E<br>• Midjourney</p>`;
+    }
+    
+    btn.disabled = false;
+    btn.textContent = 'Generate Image';
 }
 
 // EVENT LISTENERS
