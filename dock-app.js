@@ -385,21 +385,19 @@ class AudioManager {
         this.initAudio();
     }
     
-    initAudio() {
-        // Create audio objects with paths to sound files
-        // IMPORTANT: Add your audio files to a 'sounds' folder and uncomment these lines:
+    initAudio() {// Audio files configured for your uploaded files
+    this.sounds.water = new Audio('watersound.mp3');
+    this.sounds.birds = new Audio('birdsound.wav');
+    this.sounds.dock = new Audio('woodsound.wav');
+    
+    // Configure each sound
+    for (const key in this.sounds) {
+        if (this.sounds[key]) {
+            this.sounds[key].loop = true;
+            this.sounds[key].volume = 0.3; // Adjust volume (0.0 to 1.0)
+        }
+    }
         
-        // this.sounds.water = new Audio('sounds/water-lapping.mp3');
-        // this.sounds.birds = new Audio('sounds/morning-birds.mp3');
-        // this.sounds.dock = new Audio('sounds/dock-creak.mp3');
-        
-        // Configure each sound
-        // for (const key in this.sounds) {
-        //     if (this.sounds[key]) {
-        //         this.sounds[key].loop = true;
-        //         this.sounds[key].volume = 0.3; // Adjust volume (0.0 to 1.0)
-        //     }
-        // }
     }
     
     toggle(soundType) {
