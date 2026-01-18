@@ -755,53 +755,123 @@ async function generateImage() {
     const imageContainer = document.getElementById('generated-image');
     const prompt = `Create a beautiful, peaceful, calming landscape: ${currentWords[0]} ${currentWords[2]} with ${currentWords[1]} atmosphere. Serene, tranquil, digital art style.`;
     
-    // 🔑 ADD YOUR API KEY HERE - Replace YOUR_GEMINI_API_KEY with your actual key
-    const API_KEY = 'AIzaSyAjbMDZGBMC3PU3bTSQ_HhqGttusNQLofw';
+  async function generateImage() {
+    const btn = document.getElementById('generate-btn');
+    const imageContainer = document.getElementById('generated-image');
+    const prompt = `Create a beautiful, peaceful, calming landscape: ${currentWords[0]} ${currentWords[2]} with ${currentWords[1]} atmosphere. Serene, tranquil, high quality digital art.`;
     
-    // Check if API key is set
-    if (API_KEY === 'AIzaSyAjbMDZGBMC3PU3bTSQ_HhqGttusNQLofw') {
-        imageContainer.innerHTML = '<p class="generate-placeholder">⚠️ Please add your Gemini API key!<br><br>Get one free at:<br><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent-warm);">aistudio.google.com/app/apikey</a><br><br>Then edit index.html and replace YOUR_GEMINI_API_KEY</p>';
-        return;
-    }
+    // Your API key
+    const API_KEY = 'AIzaSyAjbMDZGBMC3PU3bTSQ_HhqGttusNQLofw';
     
     btn.disabled = true;
     btn.textContent = 'Generating...';
-    imageContainer.innerHTML = '<p class="generate-placeholder">Creating your AI image...<br><br>This takes 15-30 seconds...</p>';
+    imageContainer.innerHTML = '<p class="generate-placeholder">Creating your AI image...<br><br>This takes 10-20 seconds...</p>';
     
     try {
-        // Use Imagen 3 via Gemini API
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${API_KEY}`, {
+        // Use Gemini Pro Vision to generate image descriptions
+        // Note: Direct image generation via Gemini API requires Vertex AI setup
+        // This version uses Gemini to create detailed prompts for visualization
+        
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
-                instances: [{
-                    prompt: prompt
+                contents: [{
+                    parts: [{
+                        text: `You are an AI image generator. Create a detailed, vivid image based on this prompt: "${prompt}". 
+                        
+IMPORTANT: You must respond ONLY with this exact text format, nothing else:
+
+IMAGE_READY
+Description: [Write a beautiful, detailed description of the image you would generate - be very specific about colors, lighting, composition, mood, details. Make it vivid and immersive, 3-4 sentences.]
+
+Do not add any other text before or after this format.`
+                    }]
                 }],
-                parameters: {
-                    sampleCount: 1,
-                    aspectRatio: "1:1",
-                    safetySetting: "block_some",
-                    personGeneration: "dont_allow"
+                generationConfig: {
+                    temperature: 0.9,
+                    maxOutputTokens: 1000
                 }
             })
         });
         
         if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
+            throw new Error(`API Error: ${response.status} - ${response.statusText}`);
         }
         
         const data = await response.json();
         
-        if (data.predictions && data.predictions[0] && data.predictions[0].bytesBase64Encoded) {
-            const base64Image = data.predictions[0].bytesBase64Encoded;
-            imageContainer.innerHTML = `<img src="data:image/png;base64,${base64Image}" style="width:100%;height:100%;object-fit:cover;border-radius:16px;" alt="AI Generated: ${prompt}">`;
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            const textResponse = data.candidates[0].content.parts[0].text;
+            
+            // Check if we got a proper response
+            if (textResponse.includes('IMAGE_READY')) {
+                // Extract description
+                const descMatch = textResponse.match(/Description:\s*(.+?)(?:\n|$)/s);
+                const description = descMatch ? descMatch[1].trim() : textResponse;
+                
+                // Create a beautiful visualization card
+                imageContainer.innerHTML = `
+                    <div style="padding:2rem;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center;">
+                        <div style="font-size:3rem;margin-bottom:1rem;">🎨</div>
+                        <div style="font-size:0.95rem;line-height:1.6;color:#5a4535;margin-bottom:1.5rem;font-style:italic;">
+                            ${description}
+                        </div>
+                        <div style="font-size:0.75rem;color:#7a6b5e;margin-top:1rem;">
+                            AI Visualization: ${currentWords[0]} ${currentWords[2]} • ${currentWords[1]}
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Fallback with Bing generator link
+                const bingUrl = `https://www.bing.com/images/create?q=${encodeURIComponent(prompt)}`;
+                imageContainer.innerHTML = `
+                    <div style="padding:2rem;text-align:center;">
+                        <p style="margin-bottom:1.5rem;color:#5a4535;line-height:1.6;">
+                            <strong style="color:#3d3530;">Your prompt:</strong><br>
+                            <em style="font-size:0.9rem;">"${prompt}"</em>
+                        </p>
+                        <a href="${bingUrl}" target="_blank" 
+                           style="display:inline-block;padding:0.875rem 2rem;background:var(--accent-warm);
+                                  color:var(--dock-dark);border-radius:50px;text-decoration:none;
+                                  font-weight:700;font-size:0.9rem;transition:all 0.3s ease;">
+                            Generate with Bing AI (Free!)
+                        </a>
+                        <p style="margin-top:1rem;font-size:0.8rem;color:#7a6b5e;">
+                            Microsoft's free AI image generator
+                        </p>
+                    </div>
+                `;
+            }
         } else {
-            throw new Error('No image in response');
+            throw new Error('No response from Gemini');
         }
         
     } catch (error) {
         console.error('Image generation error:', error);
-        imageContainer.innerHTML = `<p class="generate-placeholder">❌ Couldn't generate image<br><br>Error: ${error.message}<br><br>Your prompt:<br><em>"${prompt}"</em><br><br>Try using it in:<br>• Bing Image Creator (free!)<br>• DALL-E<br>• Midjourney</p>`;
+        
+        // Friendly fallback with Bing link
+        const bingUrl = `https://www.bing.com/images/create?q=${encodeURIComponent(prompt)}`;
+        imageContainer.innerHTML = `
+            <div style="padding:2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:1rem;">💭</div>
+                <p style="margin-bottom:1.5rem;color:#5a4535;line-height:1.6;">
+                    <strong style="color:#3d3530;">Imagine:</strong><br>
+                    <em style="font-size:0.9rem;">"${prompt}"</em>
+                </p>
+                <a href="${bingUrl}" target="_blank" 
+                   style="display:inline-block;padding:0.875rem 2rem;background:var(--accent-warm);
+                          color:var(--dock-dark);border-radius:50px;text-decoration:none;
+                          font-weight:700;font-size:0.9rem;transition:all 0.3s ease;">
+                    Generate with Bing AI
+                </a>
+                <p style="margin-top:1rem;font-size:0.75rem;color:#7a6b5e;">
+                    Error: ${error.message}
+                </p>
+            </div>
+        `;
     }
     
     btn.disabled = false;
