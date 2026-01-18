@@ -190,34 +190,39 @@ const quotesDB = {
         { text: "Life is a dance. Mindfulness is witnessing that dance.", author: "Amit Ray" }
     ]
 };
-
 const videosDB = {
     fishing: [
-        { id: "S4dST6AK5bk", title: "Relaxing Fishing in Beautiful Mountain Stream" },
-        { id: "7HKoqNJtMTQ", title: "Peaceful Fly Fishing in Norway" },
-        { id: "9L9ppWmyoCU", title: "Trout Fishing in Crystal Clear Water" },
-        { id: "2IwT8zKLkxk", title: "Serene Lake Fishing at Sunrise" },
-        { id: "y2OFPvMbJQ8", title: "Float Fishing for Rainbow Trout" },
-        { id: "TM9pckEJm1E", title: "Shore Fishing on a Calm Day" },
-        { id: "mC8z2LjVFqg", title: "Fishing in the Scottish Highlands" },
-        { id: "KD-TYDCnZHk", title: "Peaceful Bass Fishing" },
-        { id: "gJhj8FIqm8I", title: "Sunrise Fishing Session" },
-        { id: "V_nPSm4VHXY", title: "Quiet Morning on the River" },
-        { id: "BfT1D5OUhNs", title: "Fishing Through the Seasons" },
-        { id: "TzW8eHK9KYU", title: "Solo Fishing Adventure" },
-        { id: "4bZqTqVWGG8", title: "Early Morning Fishing Therapy" },
-        { id: "jW9U2qhJGNk", title: "Stream Fishing in the Mountains" },
-        { id: "zR_VYjwGNaU", title: "Calm Waters, Clear Mind" },
+        { id: "kOWhaX3dDKw", title: "Peaceful Lake Fishing at Dawn" },
+        { id: "jW9U2qhJGNk", title: "Fly Fishing in Mountain Stream" },
+        { id: "lDi9uFcD7XI", title: "Calm Morning Fishing" },
+        { id: "QphMx0NsV0k", title: "Quiet Fishing Moments" },
+        { id: "E4r7OX9wFnI", title: "Fishing Therapy" },
+        { id: "hGlyFc79BUE", title: "Solo Fishing Day" },
+        { id: "V_nPSm4VHXY", title: "River Fishing Relaxation" },
+        { id: "BfT1D5OUhNs", title: "Seasonal Fishing Scenes" },
+        { id: "8na5RhFZFgo", title: "Early Morning Cast" },
+        { id: "TM9pckEJm1E", title: "Shore Fishing Peace" },
         { id: "CNYXGKnwJNE", title: "Quiet Fishing Moments" },
         { id: "MqF5CQR3MfE", title: "Solitude on the Water" },
         { id: "RjCN66LPHIw", title: "Fishing at Golden Hour" },
         { id: "d-nbNLpZgUo", title: "Peaceful Lakeside Fishing" },
-        { id: "XN4vzQO4sHo", title: "Meditation by the Water" }
+        { id: "XN4vzQO4sHo", title: "Meditation by the Water" },
+        { id: "zR_VYjwGNaU", title: "Calm Waters Clear Mind" },
+        { id: "gJhj8FIqm8I", title: "Sunrise Fishing Session" },
+        { id: "KD-TYDCnZHk", title: "Peaceful Bass Fishing" },
+        { id: "mC8z2LjVFqg", title: "Fishing in Scottish Highlands" },
+        { id: "TzW8eHK9KYU", title: "Solo Fishing Adventure" }
     ],
     beagles: [
         { id: "D-UmfqFjpl0", title: "Dog Reacts to Magic Tricks" },
-        { id: "nGeKSiCQkPw", title: "Funny Beagle Compilation" },
-        { id: "z6EchXyieos", title: "Beagle Puppy First Day Home" },
+        { id: "h4hBqSlAiIk", title: "Dogs Meeting Babies Compilation" },
+        { id: "5xLmV1YFZH0", title: "Dogs and Kids Best Friends" },
+        { id: "fWPp8cqJ3YM", title: "Funny Dog Fails" },
+        { id: "gX3sD9ry7Fc", title: "Guilty Dogs Compilation" },
+        { id: "tP-Ipsat90c", title: "Dogs Being Weird" },
+        { id: "mRf3-JkwqfU", title: "Dogs and Treats" },
+        { id: "y7kZtNBz3kM", title: "Dogs Being Goofy" },
+        { id: "z6EchXyieos", title: "Puppy First Day Home" },
         { id: "JZ9f47P3C_E", title: "Beagles Being Silly" },
         { id: "AZ2ZPmEfjvU", title: "Happy Beagles Playing" },
         { id: "dQcEHv_36Pc", title: "Beagles Howling Together" },
@@ -225,30 +230,20 @@ const videosDB = {
         { id: "AePRGMqTs1M", title: "Beagle Adventures" },
         { id: "KKcGP3F0aPg", title: "Dogs Making Friends" },
         { id: "CgGvlmFFSWk", title: "Playful Puppies" },
-        { id: "5xLmV1YFZH0", title: "Dogs and Kids Being Best Friends" },
-        { id: "fWPp8cqJ3YM", title: "Funny Dog Fails" },
         { id: "CGz2lV0DF9k", title: "Dogs Meeting New Siblings" },
         { id: "EHGOdLv_PVw", title: "Excited Dogs Coming Home" },
         { id: "YVp3Y3JBXss", title: "Dogs Talking Back" },
-        { id: "tBl9hZqYZYE", title: "Guilty Dogs" },
-        { id: "mRf3-JkwqfU", title: "Dogs and Treats" },
-        { id: "cST8ZJJ3FYU", title: "Happy Dog Zoomies" },
-        { id: "y7kZtNBz3kM", title: "Dogs Being Goofy" },
         { id: "wBSnCmRmWIU", title: "Wholesome Dog Moments" }
     ],
     goodnews: [
-        { id: "uaWA2GbcnJU", title: "People Being Awesome to Each Other" },
+        { id: "uaWA2GbcnJU", title: "People Being Awesome" },
         { id: "7ugJhY3KhsA", title: "Random Acts of Kindness" },
-        { id: "zlfKdbWwruY", title: "Good News Stories" },
         { id: "X-P9TJRqRm4", title: "Faith in Humanity Restored" },
         { id: "nKxvDYHkfSg", title: "Kindness Compilation" },
         { id: "UxKY3Nt3AhM", title: "People Helping People" },
         { id: "0hzxwoZDUiw", title: "Wholesome Moments" },
-        { id: "jJNrYuq02Zk", title: "Good Deeds Caught on Camera" },
         { id: "YQ4V_-GY3PM", title: "Heartwarming Stories" },
-        { id: "zzs4iMb8_fU", title: "Acts of Kindness 2024" },
         { id: "eREjx25lQJU", title: "Humans Being Bros" },
-        { id: "nRclAwsPVwM", title: "Restoring Faith" },
         { id: "PhqR2fvW8Do", title: "Good People Doing Good Things" },
         { id: "Z4gBxj7rMlY", title: "Touching Moments" },
         { id: "tYzMYcUty6s", title: "Community Coming Together" },
@@ -256,7 +251,11 @@ const videosDB = {
         { id: "q5z_qLQhWlE", title: "Making a Difference" },
         { id: "v3w2AbuZl4k", title: "Uplifting News" },
         { id: "P8LQ9tMqbP0", title: "Positive Stories" },
-        { id: "g0tPNP8SY0Q", title: "Hope and Kindness" }
+        { id: "g0tPNP8SY0Q", title: "Hope and Kindness" },
+        { id: "jJNrYuq02Zk", title: "Good Deeds Caught on Camera" },
+        { id: "zzs4iMb8_fU", title: "Acts of Kindness 2024" },
+        { id: "nRclAwsPVwM", title: "Restoring Faith" },
+        { id: "zlfKdbWwruY", title: "Good News Stories" }
     ],
     random: [
         { id: "pFlcqWQVVuU", title: "Tiny Hamster Eating Tiny Burritos" },
@@ -268,7 +267,6 @@ const videosDB = {
         { id: "eRBOgtp0Hac", title: "Wholesome Internet Moments" },
         { id: "_MaJJJXzLXU", title: "Feel Good Moments" },
         { id: "5_sfnQDr1-o", title: "Satisfying Videos" },
-        { id: "7xjQvFe7Fwc", title: "Funny Moments Caught on Camera" },
         { id: "ZP7K9SycELA", title: "Pure Joy Moments" },
         { id: "p8ncvpLJi4s", title: "Unexpected Wholesomeness" },
         { id: "SL_x1rRg7mM", title: "Happy Accidents" },
@@ -278,9 +276,11 @@ const videosDB = {
         { id: "TXe0JScPPx4", title: "Joy in Simple Things" },
         { id: "b89CnP0Iq30", title: "Awesome Humans" },
         { id: "NHfRPW_kkfE", title: "Life is Beautiful" },
-        { id: "E5KC1E5NyR0", title: "Smile Guaranteed" }
+        { id: "E5KC1E5NyR0", title: "Smile Guaranteed" },
+        { id: "7xjQvFe7Fwc", title: "Funny Moments Caught on Camera" }
     ]
 };
+
 
 const articlesDB = [
     { title: "Practical Tools for Managing Depression", excerpt: "Evidence-based strategies and self-help tools specifically designed for men dealing with depression and difficult emotions.", source: "HeadsUpGuys", url: "https://headsupguys.org/take-action/", category: "general" },
