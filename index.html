@@ -1729,29 +1729,50 @@ body.night .stars {
         </div>
     </div>
 
-    <div id="photos-page" class="page">
-        <div class="dock-bg"></div>
-        <div class="wood-planks"></div>
-        <div class="wood-grain"></div>
-        <div class="water-section">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="water-shimmer"></div>
-        </div>
-        <div class="dock-edge"></div>
-        <div class="page-header">
-            <button id="back-from-photos" class="back-btn">Back</button>
-            <h2>Your memories</h2>
-        </div>
-        <div class="content-wrapper">
-            <div class="photos-container">
-                <div id="photo-display" class="photo-display">
-       <iframe src="https://photos.app.goo.gl/foJNzmAVhmv6vq1F9" width="100%" height="100%" frameborder="0" style="border-radius:16px;"></iframe>
-   </div>
-                <button id="next-photo-btn" class="action-button">Another photo</button>
+  <div id="photos-page" class="page">
+    <div class="dock-bg"></div>
+    <div class="wood-planks"></div>
+    <div class="wood-grain"></div>
+    <div class="water-section">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="water-shimmer"></div>
+    </div>
+    <div class="dock-edge"></div>
+    <div class="page-header">
+        <button id="back-from-photos" class="back-btn">Back</button>
+        <h2>Your memories</h2>
+    </div>
+    <div class="content-wrapper">
+        <div class="photos-container">
+            <div class="photo-display" style="padding:2rem;text-align:center;">
+                <div style="margin-bottom:2rem;">
+                    <svg style="width:60px;height:60px;stroke:var(--accent-warm);fill:none;stroke-width:2;margin-bottom:1rem;" viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5" fill="var(--accent-warm)"/>
+                        <path d="M21 15l-5-5L5 21"/>
+                    </svg>
+                </div>
+                <h3 style="color:var(--text-light);font-size:1.2rem;font-weight:700;margin-bottom:1rem;">
+                    Photo Album
+                </h3>
+                <p style="color:var(--text-muted);margin-bottom:2rem;line-height:1.6;">
+                    View all your favorite memories in one place
+                </p>
+                <a href="https://photos.app.goo.gl/foJNzmAVhmv6vq1F9" target="_blank" 
+                   style="display:inline-block;padding:1rem 2.5rem;background:var(--dock-wood);
+                          color:var(--text-light);border-radius:50px;text-decoration:none;
+                          font-weight:700;font-size:1rem;transition:all 0.3s ease;
+                          box-shadow:0 4px 15px rgba(0,0,0,0.25);">
+                    Open Photo Album
+                </a>
+                <p style="margin-top:1.5rem;font-size:0.85rem;color:var(--text-muted);">
+                    Opens in new tab • Swipe to browse
+                </p>
             </div>
         </div>
     </div>
+</div>
 
     <div id="breathing-page" class="page">
         <div class="dock-bg"></div>
