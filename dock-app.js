@@ -749,11 +749,6 @@ function stopBreathing() {
     document.getElementById('breath-text').textContent = 'Tap to start';
     document.getElementById('breath-circle').className = 'breath-circle';
 }
-
-async function generateImage() {
-    const btn = document.getElementById('generate-btn');
-    const imageContainer = document.getElementById('generated-image');
-    const prompt = `Create a beautiful, peaceful, calming landscape: ${currentWords[0]} ${currentWords[2]} with ${currentWords[1]} atmosphere. Serene, tranquil, digital art style.`;
     
   async function generateImage() {
     const btn = document.getElementById('generate-btn');
